@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationVC = UINavigationController(rootViewController: productListVC)
 
         coreDataStack = CoreDataStack()
-        let model = ProductListModel(coreDataStack: coreDataStack)
+        let model = ProductListModel(moContext: coreDataStack.moContext)
         let presenter = ProductListPresenter(view: productListVC, model: model)
         productListVC.inject(presenter: presenter)
 

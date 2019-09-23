@@ -3,9 +3,11 @@ import CoreData
 
 class CoreDataStack {
 
-    // MARK: - Core Data stack
+    lazy var moContext: NSManagedObjectContext = {
+        persistentContainer.viewContext
+    }()
 
-    lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
@@ -26,7 +28,7 @@ class CoreDataStack {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Unresolved error \(error), \(error.userInfo)")
             }
         })
         #if DEBUG
@@ -47,10 +49,8 @@ class CoreDataStack {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
-
-
 }
